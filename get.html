@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="insta"></div>
     <script>
         fetch('https://www.instagram.com/inusbath/')
 			.then(response => response.text())
@@ -18,7 +19,9 @@
                     html += '<a href="https://instagram.com/p/'+ data.node.shortcode +'" target="_blank" style="background-image: url('+ data.node.display_url +');"></a>';
 					if ( i >= 3 ) { break; }
 				}
+                document.querySelector('#insta').innerHTML = insta_html;
+                console.log('HTML', insta_html);
 			})
     </script>
-</body>>
+</body>
 </html>
