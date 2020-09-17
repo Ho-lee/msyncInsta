@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch('https://www.instagram.com/inusbath/')
+			.then(response => response.text())
+			.then( html => {
+				let graphQL = JSON.parse(/_sharedData?\s=?\s([^;]*)/.exec(html)[1]);
+				let latestInstaList = graphQL.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges;
+                let insta_html = '';
+				for ( let i in latestInstaList ) {
+					let data = latestInstaList[i];
+                    html += '<a href="https://instagram.com/p/'+ data.node.shortcode +'" target="_blank" style="background-image: url('+ data.node.display_url +');"></a>';
+					if ( i >= 3 ) { break; }
+				}
+			})
+    </script>
+</body>>
+</html>
